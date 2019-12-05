@@ -1,3 +1,8 @@
+.top-panel
+    img(src="assets/logo.png").logo
+    #username
+    img(src="assets/scoreboard.svg" title="Scoreboard" onclick="Tabs.change('Scoreboard')").scoreboard
+    img(src="assets/exit.svg" title="Log out" onclick="Tasks.logout()").exit
 .tasks-wrapper
     .categories.gradient-border
         each category in categories

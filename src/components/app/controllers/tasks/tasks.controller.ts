@@ -1,7 +1,8 @@
+import TasksService from "../../services/tasks.service";
 import Task, { Category } from "../../models/task.class";
 import Service from "../../../common/service.abstract";
 
-export default class Tasks extends Service<"">() {
+export default class Tasks extends Service<"logouted" | "categorychanged">() {
 	private static containers: {
 		[category: string]: HTMLElement;
 	} | null = null;
@@ -25,17 +26,31 @@ export default class Tasks extends Service<"">() {
 		}
 
 		this.expose("showCategory");
+		this.expose("submitFlag");
+		this.expose("logout");
 		this.showCategory(Category[0]);
 	}
 
+	/**
+	 * Renders an array of tasks on the page
+	 * @param tasks Task array
+	 */
 	public static renderTasks(tasks: Task[]): void {
 		if (!this.containers) return;
+
+		for (const container of Object.values(this.containers)) {
+			container.innerHTML = "";
+		}
 
 		for (const task of tasks) {
 			const container = this.containers[Category[task.category]];
 
 			const wrapper = document.createElement("div");
 			wrapper.classList.add("task");
+			wrapper.id = "task-" + task.id;
+			if (task.solved) {
+				wrapper.classList.add("solved");
+			}
 
 			const name = document.createElement("div");
 			name.classList.add("name");
@@ -49,7 +64,7 @@ export default class Tasks extends Service<"">() {
 			link.classList.add("link");
 			if (task.link) {
 				link.target = "_blank";
-				link.textContent = task.link.href;
+				link.textContent = "CLICK ME";
 				link.href = task.link.href;
 			}
 
@@ -58,10 +73,18 @@ export default class Tasks extends Service<"">() {
 			description.innerHTML = task.description;
 
 			const input = document.createElement("input");
+			input.addEventListener("animationend", () => {
+				input.classList.remove("apply-shake");
+			});
 			input.type = "text";
+			input.placeholder = "ELON{\\S+}";
+			input.pattern = "ELON\\{\\S+\\}";
 
 			const button = document.createElement("button");
 			button.innerHTML = "&#10004;&#65039;";
+			button.onclick = (): void => {
+				this.submitFlag(task.id, input.value);
+			};
 
 			wrapper.appendChild(name);
 			if (task.link) {
@@ -76,6 +99,10 @@ export default class Tasks extends Service<"">() {
 		}
 	}
 
+	/**
+	 * Shows specified category
+	 * @param name Category name
+	 */
 	public static showCategory(name: string): void {
 		if (!this.containers) return;
 
@@ -84,5 +111,36 @@ export default class Tasks extends Service<"">() {
 		}
 
 		this.containers[name].style.display = "block";
+
+		this.call("categorychanged", name);
+	}
+
+	/**
+	 * Submits flag to backend
+	 * @param id Task id
+	 * @param flag Flag to submit
+	 */
+	public static async submitFlag(id: number, flag: string): Promise<void> {
+		const solved = await TasksService.submitFlag(id, flag);
+
+		const task = document.getElementById("task-" + id);
+		if (!task) return;
+
+		if (solved) {
+			(task as HTMLElement).classList.add("solved");
+		} else {
+			const input = task.querySelector("input");
+			(input as HTMLInputElement).value = "";
+			if (input) {
+				input.classList.add("apply-shake");
+			}
+		}
+	}
+
+	/**
+	 * Calls logout event
+	 */
+	public static logout(): void {
+		this.call("logouted");
 	}
 }

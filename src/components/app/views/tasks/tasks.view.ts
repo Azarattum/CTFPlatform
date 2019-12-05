@@ -22,6 +22,14 @@ export default class Tasks extends View {
 			tasks.then(tasks => {
 				TasksController.renderTasks(tasks);
 			});
+
+			const name = TasksService.getUsername();
+			name.then(name => {
+				const container = document.getElementById("username");
+				if (container) {
+					container.textContent = name;
+				}
+			});
 		}
 	}
 }

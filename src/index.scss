@@ -3,6 +3,7 @@ body {
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
+    background-color: hsl(240, 50%, 4%);
 }
 
 .page {
@@ -20,6 +21,7 @@ body {
     --color-theme-7: hsla(230, 100%, 50%, 0.2);
     --color-theme-8: hsla(240, 80%, 20%, 0.5);
 
+    height: 100%;
     min-height: 100vh;
     min-width: 100vw;
 

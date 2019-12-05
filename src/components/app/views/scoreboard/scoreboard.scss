@@ -1,0 +1,35 @@
+.scoreboard-wrapper {
+    display: flex;
+    justify-content: center;
+
+    table {
+        position: absolute;
+        top: 64px;
+        width: 80vw;
+        min-height: calc(100vh - 64px);
+        text-align: center;
+    }
+
+    #scoreboard {
+        font-size: 2em;
+        z-index: 2;
+        overflow: hidden;
+
+        tr {
+            --border-width: 3px;
+            transform: translate(0, 0);
+            background-color: rgba(0, 0, 0, 0.3);
+            max-height: 64px;
+            overflow: hidden;
+
+            &:after {
+                opacity: 0.4 !important;
+            }
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+        }
+    }
+}

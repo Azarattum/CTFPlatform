@@ -6,13 +6,17 @@ import Api from "./services/api.class";
 /**Services */
 import LoginController from "./controllers/login/login.controller";
 import TasksController from "./controllers/tasks/tasks.controller";
+import ScoreboardController from "./controllers/scoreboard/scoreboard.controller";
 import Events from "./services/events.service";
 import Tasks from "./services/tasks.service";
+import Scoreboard from "./services/scoreboard.service";
+import Tabs from "../common/tabs.service";
 /**Views */
 import LoginView from "./views/login/login.view";
 import TasksView from "./views/tasks/tasks.view";
 import BackgroundView from "./views/background/background.view";
-import Tabs from "../common/tabs.service";
+import ScoreboardView from "./views/scoreboard/scoreboard.view";
+import Hash from "../common/hash.service";
 
 /**
  * Main application class
@@ -30,14 +34,18 @@ export default class App {
 		const components: IComponent[] = [
 			LoginController,
 			TasksController,
+			ScoreboardController,
 			Tabs,
 			Tasks,
-			Events
+			Scoreboard,
+			Events,
+			Hash
 		];
 
 		const views: View[] = [
 			new LoginView(),
 			new TasksView(),
+			new ScoreboardView(),
 			new BackgroundView()
 		];
 
@@ -48,16 +56,7 @@ export default class App {
 
 		await this.manger.initialize(argsComp, argsView);
 
-		//Restore session
-		const session = document.cookie
-			.split(";")
-			.find(x => x.split("=")[0] == "session");
-		if (session) {
-			api.forceUUID(session.split("=")[1]);
-			Tabs.change("Tasks");
-		} else {
-			Tabs.change("Login");
-		}
+		Tabs.change("Login");
 	}
 
 	/**
@@ -75,7 +74,14 @@ export default class App {
 		return {
 			Events: [api],
 			Tasks: [api],
-			Tabs: [[this.manger.getView("Login"), this.manger.getView("Tasks")]]
+			Scoreboard: [api],
+			Tabs: [
+				[
+					this.manger.getView("Login"),
+					this.manger.getView("Tasks"),
+					this.manger.getView("Scoreboard")
+				]
+			]
 		};
 	}
 

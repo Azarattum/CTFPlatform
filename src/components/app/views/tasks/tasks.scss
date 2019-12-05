@@ -94,7 +94,7 @@
                 }
 
                 .link {
-                    font-style: italic;
+                    font-size: 0.8em;
                     filter: saturate(0) invert(1);
                 }
 
@@ -116,6 +116,122 @@
                     padding: 10px;
                 }
             }
+
+            .task.solved {
+                --border-width: 0px;
+                position: relative;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    top: calc(-1 * var(--border-width));
+                    left: calc(-1 * var(--border-width));
+                    height: calc(100% + var(--border-width) * 2);
+                    width: calc(100% + var(--border-width) * 2);
+                    background: linear-gradient(60deg,
+                            var(--color-theme-1),
+                            var(--color-theme-2),
+                            var(--color-theme-3),
+                            var(--color-theme-4),
+                            var(--color-theme-5),
+                            var(--color-theme-6),
+                            var(--color-theme-7),
+                            var(--color-theme-8));
+                    border-radius: 8px;
+                    z-index: -1;
+                    animation: animatedgradient 3s ease alternate infinite;
+                    background-size: 300% 300%;
+                }
+
+                input,
+                button {
+                    display: none;
+                }
+
+                .name {
+                    text-shadow: none;
+                }
+
+                &:before {
+                    content: "[SOLVED]";
+                    font-weight: bold;
+                }
+            }
         }
     }
+}
+
+.top-panel {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: max-content;
+    height: 64px;
+
+    border-bottom-left-radius: 16px;
+
+    z-index: 100;
+    background-color: var(--color-ui-active);
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.8);
+
+    .logo {
+        float: left;
+        width: 64px;
+        height: 64px;
+        margin-left: 16px;
+
+        border-bottom-left-radius: 16px;
+    }
+
+    .exit {
+        padding: 16px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+
+    .scoreboard {
+        padding: 16px;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+
+    #username {
+        float: left;
+
+        margin-left: 16px;
+        margin-right: 16px;
+        line-height: 64px;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+.apply-shake {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
 }
