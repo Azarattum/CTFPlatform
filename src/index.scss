@@ -1,0 +1,36 @@
+//Core styles
+body {
+    --color-text: rgb(63, 60, 66);
+
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--color-text);
+}
+
+.page {
+    ///COLOR DEFENITIONS HERE
+    --color-temp: rgb(18, 109, 59);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--color-text);
+}
