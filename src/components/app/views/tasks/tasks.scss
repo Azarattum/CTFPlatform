@@ -32,12 +32,18 @@
             transition: 0.3s;
             cursor: pointer;
 
-            &:hover {
+            &.selected {
+                font-weight: bold;
+            }
+
+            &:hover,
+            &.selected {
                 box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
                 transform: translateY(5%) scale(0.99);
             }
 
-            &:active {
+            &:active,
+            &.selected {
                 background-color: var(--color-ui-active);
             }
 

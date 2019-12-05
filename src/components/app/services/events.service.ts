@@ -58,6 +58,16 @@ export default class Events extends Service<"registered">() {
 
 		Tasks.addEventListener("categorychanged", (name: string) => {
 			Hash.set("category", name);
+			const elements = document.getElementsByClassName("category");
+			for (const element of elements) {
+				element.classList.remove("selected");
+				if (
+					element.textContent &&
+					element.textContent.toLowerCase() == name
+				) {
+					element.classList.add("selected");
+				}
+			}
 		});
 	}
 
