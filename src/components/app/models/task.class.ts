@@ -20,16 +20,22 @@ export default class Task {
 		points: number = 0,
 		solved: boolean = false,
 		description: string = "",
-		link: URL | null = null
+		link: string = ""
 	) {
 		this.id = id;
 		this.name = name;
 		this.points = points;
 		this.solved = solved;
 		this.description = description;
-		this.link = link;
+		try {
+			this.link = new URL(link);
+		} catch {
+			this.link = null;
+		}
 		this.category =
-			typeof category === "string" ? Category[category] : category;
+			typeof category === "string"
+				? ((Category[category as any] as unknown) as Category)
+				: (category as Category);
 	}
 }
 

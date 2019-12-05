@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 1;
+    transform: translate(0, 0);
+
+    .title {
+        font-size: 5em;
+        font-family: Montserrat;
+        opacity: 0.9;
+
+        text-shadow: 0px 6px 16px black;
+    }
+
+    .form {
+        --border-width: 4px;
+
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.4);
+
+        button {
+            width: 100%;
+        }
+    }
+}

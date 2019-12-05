@@ -1,0 +1,121 @@
+.tasks-wrapper {
+    display: flex;
+    transform: translate(0, 0);
+
+    .categories {
+        position: sticky;
+        float: left;
+        top: 0px;
+
+        --border-width: 4px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+
+        width: max-content;
+        height: 100vh;
+        box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.4);
+
+
+        .category {
+            width: 150px;
+            padding: 16px;
+
+            background-color: var(--color-ui);
+            transform: translate(0, 0);
+
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+
+            transition: 0.3s;
+            cursor: pointer;
+
+            &:hover {
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+                transform: translateY(5%) scale(0.99);
+            }
+
+            &:active {
+                background-color: var(--color-ui-active);
+            }
+
+            .icon {
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                height: 32px;
+                width: 32px;
+
+                background-size: contain;
+                transform: translateY(-50%);
+
+                filter: invert(1);
+            }
+        }
+    }
+
+    .tasks {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-width: 500px;
+        margin: 32px;
+
+        .task-list {
+            display: none;
+
+            .task {
+                margin: 32px;
+                padding: 16px;
+
+                width: calc(100% - 96px);
+                max-width: 600px;
+
+                border-radius: 8px;
+                background-color: rgba(0, 0, 0, 0.1);
+                box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+
+                .name {
+                    margin-right: auto;
+
+                    font-size: 2em;
+                    font-weight: bold;
+                    text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
+                }
+
+                .points {
+                    font-size: 2em;
+                    font-weight: bold;
+                    padding: 16px;
+                    text-align: end;
+                }
+
+                .link {
+                    font-style: italic;
+                    filter: saturate(0) invert(1);
+                }
+
+                .description {
+                    margin: 8px;
+                }
+
+                input {
+                    float: left;
+                    height: 16px;
+                    width: 200px;
+
+                    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.8);
+                }
+
+                button {
+                    float: left;
+                    font-size: 1.5em;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}

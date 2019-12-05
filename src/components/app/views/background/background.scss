@@ -1,0 +1,79 @@
+$cyan: hsl(190, 100%, 72%);
+$cyanDark: darken($cyan, 30);
+$bgGridSize: 6em;
+$halfBgGridSize: $bgGridSize / 2;
+$bgGridLineColor: rgba($cyan, .1);
+$bgGridLineStroke: 2px;
+
+$blueDark: hsl(240, 50%, 4.5%);
+
+.hologram {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    perspective: 300px;
+    width: 1.5em;
+    height: 1.5em;
+    z-index: 0;
+    border-radius: 50%;
+    background-image: radial-gradient(to top, $cyan, rgba($cyanDark, .3));
+    background-repeat: no-repeat;
+    box-shadow: 0 .7em .25em -.6em rgba(black, .5), 0 .6em 1em -.4em rgba(black, 1), 0 0 1.5em 0 rgba($cyan, 1), 0 0 6em 1em rgba($cyan, .5), 0 0 3em .5em rgba($cyan, .5);
+    transform-style: preserve-3d;
+    pointer-events: none;
+
+    &:after,
+    &:before {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        border-radius: .4em;
+    }
+
+    &:before {
+        width: 100em;
+        height: 100em;
+        left: 50%;
+        top: 0;
+        z-index: 0;
+        transform: translate(-50%, -50%) translateZ(-10em) rotateX(50deg) scale(.75);
+        background-image: radial-gradient(rgba($blueDark, 0), $blueDark 35%),
+        radial-gradient(rgba($cyan, .2), transparent),
+        linear-gradient($bgGridLineColor $bgGridLineStroke, transparent $bgGridLineStroke),
+        linear-gradient(90deg, transparent calc(100% - #{$bgGridLineStroke}), $bgGridLineColor calc(100% - #{$bgGridLineStroke})),
+        linear-gradient(90deg, $blueDark calc(100% - #{$bgGridLineStroke}), transparent calc(100% - #{$bgGridLineStroke})),
+        linear-gradient($cyan $bgGridLineStroke, transparent $bgGridLineStroke);
+        background-size: 100% 100%, 100% 100%, $bgGridSize $bgGridSize, $bgGridSize $bgGridSize, $bgGridSize $bgGridSize, $bgGridSize $bgGridSize;
+        background-position: top center;
+        /*Disabled animation for better performance*/
+        // animation: animatelight 10s infinite ease;
+    }
+
+    &:after {
+        bottom: 0;
+        left: 50%;
+        width: 100%;
+        height: 100vh;
+        z-index: º;
+        transform-origin: 50% 100%;
+        transform: translate(-50%, 0) rotateX(-86.8deg);
+        background-image: radial-gradient(to top, transparent 30%, rgba($cyan, .1) 60%, transparent 70%);
+        opacity: .75;
+        animation: lightVibration .07s linear infinite;
+    }
+}
+
+@keyframes animatelight {
+    0% {
+        background-size: 100% 100%, 100% 100%, 6em 6em, 6em 6em, 6em 6em, 6em 6em;
+    }
+
+    50% {
+        background-size: 150% 100%, 150% 100%, 6em 6em, 6em 6em, 6em 6em, 6em 6em;
+    }
+
+    100% {
+        background-size: 100% 100%, 100% 100%, 6em 6em, 6em 6em, 6em 6em, 6em 6em;
+    }
+}

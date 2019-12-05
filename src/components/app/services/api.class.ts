@@ -50,7 +50,6 @@ export default class Api {
 		const loader = new Loader([url]);
 
 		let response = (await loader.load())[0];
-		console.log(response);
 		if (!response) {
 			return { success: false, data: {} };
 		}
@@ -76,6 +75,15 @@ export default class Api {
 	public freeUUID(): void {
 		this.UUID = null;
 	}
+
+	/**
+	 * Manualy set uuid
+	 * @param uuid New UUID
+	 */
+	public forceUUID(uuid: string): void {
+		this.cachingUUID = true;
+		this.UUID = uuid;
+	}
 }
 
 export enum Method {
@@ -87,5 +95,5 @@ export enum Method {
 
 export interface IResponse {
 	success: boolean;
-	data: object;
+	data: any;
 }

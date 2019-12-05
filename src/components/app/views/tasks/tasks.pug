@@ -1,2 +1,8 @@
 .tasks-wrapper
-    
+    .categories.gradient-border
+        each category in categories
+            .category(onclick="Tasks.showCategory(\""+category.toLowerCase()+"\")")= category
+                .icon(style="background-image: url(assets/"+category.toLowerCase()+".svg)")
+    .tasks
+        each category in categories
+            .task-list(id=category.toLowerCase()+"-tasks-list")
