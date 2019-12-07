@@ -4,19 +4,21 @@ import View from "../common/view.abstract";
 import { Category } from "./models/task.class";
 import Api from "./services/api.class";
 /**Services */
-import LoginController from "./controllers/login/login.controller";
-import TasksController from "./controllers/tasks/tasks.controller";
-import ScoreboardController from "./controllers/scoreboard/scoreboard.controller";
+import LoginController from "./controllers/login.controller";
+import RegistrationController from "./controllers/registration.controller";
+import TasksController from "./controllers/tasks.controller";
+import ScoreboardController from "./controllers/scoreboard.controller";
 import Events from "./services/events.service";
 import Tasks from "./services/tasks.service";
 import Scoreboard from "./services/scoreboard.service";
 import Tabs from "../common/tabs.service";
+import Hash from "../common/hash.service";
 /**Views */
 import LoginView from "./views/login/login.view";
 import TasksView from "./views/tasks/tasks.view";
 import BackgroundView from "./views/background/background.view";
 import ScoreboardView from "./views/scoreboard/scoreboard.view";
-import Hash from "../common/hash.service";
+import RegistrationView from "./views/registration/registration.view";
 
 /**
  * Main application class
@@ -33,6 +35,7 @@ export default class App {
 
 		const components: IComponent[] = [
 			LoginController,
+			RegistrationController,
 			TasksController,
 			ScoreboardController,
 			Tabs,
@@ -44,6 +47,7 @@ export default class App {
 
 		const views: View[] = [
 			new LoginView(),
+			new RegistrationView(),
 			new TasksView(),
 			new ScoreboardView(),
 			new BackgroundView()
@@ -79,7 +83,8 @@ export default class App {
 				[
 					this.manger.getView("Login"),
 					this.manger.getView("Tasks"),
-					this.manger.getView("Scoreboard")
+					this.manger.getView("Scoreboard"),
+					this.manger.getView("Registration")
 				]
 			]
 		};

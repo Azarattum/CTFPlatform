@@ -1,4 +1,4 @@
-import Board from "../../models/scoreboard.class";
+import Board from "../models/scoreboard.class";
 
 export default class Scoreboard {
 	private static container: HTMLElement | null = null;

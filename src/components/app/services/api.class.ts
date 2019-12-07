@@ -59,7 +59,7 @@ export default class Api {
 		}
 
 		//Cache uuid on login
-		if (response["Data"]["UUID"]) {
+		if (response["Data"] && response["Data"]["UUID"]) {
 			this.UUID = response["Data"]["UUID"];
 		}
 
@@ -90,7 +90,8 @@ export enum Method {
 	"auth",
 	"event",
 	"task",
-	"scoreboard"
+	"scoreboard",
+	"registration"
 }
 
 export interface IResponse {

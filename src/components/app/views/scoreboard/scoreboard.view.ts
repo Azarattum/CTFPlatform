@@ -2,7 +2,7 @@ import "./scoreboard.scss";
 import Template from "./scoreboard.pug";
 import View from "../../../common/view.abstract";
 import ScoreboardService from "../../services/scoreboard.service";
-import ScoreboardController from "../../controllers/scoreboard/scoreboard.controller";
+import ScoreboardController from "../../controllers/scoreboard.controller";
 import TasksService from "../../services/tasks.service";
 
 /**

@@ -1,7 +1,7 @@
 import "./tasks.scss";
 import Template from "./tasks.pug";
 import View from "../../../common/view.abstract";
-import TasksController from "../../controllers/tasks/tasks.controller";
+import TasksController from "../../controllers/tasks.controller";
 import TasksService from "../../services/tasks.service";
 
 /**

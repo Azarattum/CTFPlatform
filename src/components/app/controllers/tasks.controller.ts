@@ -1,6 +1,6 @@
-import TasksService from "../../services/tasks.service";
-import Task, { Category } from "../../models/task.class";
-import Service from "../../../common/service.abstract";
+import TasksService from "../services/tasks.service";
+import Task, { Category } from "../models/task.class";
+import Service from "../../common/service.abstract";
 
 export default class Tasks extends Service<"logouted" | "categorychanged">() {
 	private static containers: {

@@ -1,8 +1,6 @@
-import Service from "../../../common/service.abstract";
+import Service from "../../common/service.abstract";
 
 export default class Login extends Service<"logined">() {
-	private static loginField: HTMLInputElement | null = null;
-	private static passwordField: HTMLInputElement | null = null;
 	private static loginButton: HTMLButtonElement | null = null;
 
 	private static timeout: NodeJS.Timeout;
@@ -11,31 +9,26 @@ export default class Login extends Service<"logined">() {
 	 * Initializes login controller
 	 */
 	public static initialize(): void {
-		const loginField = document.getElementById("login-field");
-		const passwordField = document.getElementById("password-field");
 		const loginButton = document.getElementById("login-button");
-		if (!loginField || !passwordField || !loginButton) {
-			throw new Error("Containers for login not found!");
+		if (!loginButton) {
+			throw new Error("Login button not found!");
 		}
 
-		this.loginField = loginField as HTMLInputElement;
-		this.passwordField = passwordField as HTMLInputElement;
 		this.loginButton = loginButton as HTMLButtonElement;
 
 		(this
 			.loginButton as any).originalContent = this.loginButton.textContent;
 
-		loginButton.addEventListener("click", () => {
-			if (!this.loginField || !this.passwordField || !this.loginButton) {
-				return;
-			}
+		this.expose("login");
+	}
 
-			this.call(
-				"logined",
-				this.loginField.value,
-				this.passwordField.value
-			);
-		});
+	/**
+	 * Initiates the login sequence
+	 * @param login User's login
+	 * @param password User's password
+	 */
+	public static login(login: string, password: string): void {
+		this.call("logined", login, password);
 	}
 
 	public static setStatus(status: string): void {

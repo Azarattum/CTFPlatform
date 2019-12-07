@@ -1,0 +1,14 @@
+.login-wrapper
+    .title Elon CTF
+    .form.gradient-border
+        input#new-login-field(type="text" placeholder="Login")
+        input#new-password-field(type="password" placeholder="Password")
+        input#new-password-confirmation-field(type="password" placeholder="Repeat Password")
+        button#registration-button(
+            onclick=`Registration.register(
+                document.getElementById('new-login-field').value,
+                document.getElementById('new-password-field').value,
+                document.getElementById('new-password-confirmation-field').value
+            )`
+        ) Register
+        span(onclick="Tabs.change('Login')") Already have an account?

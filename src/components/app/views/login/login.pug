@@ -1,6 +1,12 @@
 .login-wrapper
     .title Elon CTF
     .form.gradient-border
-        input#login-field(type="text" name="login" placeholder="Login")
-        input#password-field(type="password" name="passw" placeholder="Password")
-        button#login-button(type="submit" value="Sign in") Login
+        input#login-field(type="text" placeholder="Login")
+        input#password-field(type="password" placeholder="Password")
+        button#login-button(
+            onclick=`Login.login(
+                document.getElementById('login-field').value,
+                document.getElementById('password-field').value
+            )`
+        ) Login
+        span(onclick="Tabs.change('Registration')") Need an account?
